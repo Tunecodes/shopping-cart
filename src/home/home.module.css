@@ -1,0 +1,78 @@
+.container {
+  display: flex;
+  height: 93vh;
+}
+
+button:hover {
+  cursor: pointer;
+}
+
+.quote-con {
+  white-space: nowrap;
+  margin-top: 15rem;
+  margin-left: 15rem;
+  font-size: 2.5em;
+}
+
+.line2,
+.line3 {
+  margin-top: 20px;
+}
+
+.line1 {
+  margin-left: 1rem;
+}
+
+.line2 {
+  font-size: 1.2em;
+  margin-left: 2rem;
+  font-weight: bold;
+}
+
+.line3 {
+  margin-left: 2em;
+}
+
+.quote-con button {
+  border: 2px solid black;
+  font-size: 23px;
+  margin-top: 3em;
+  margin-left: 7em;
+  width: 10em;
+  height: 2.5em;
+  background-color: black;
+  color: white;
+  border-radius: 10px;
+  transition: transform 0.7s ease;
+}
+
+.quote-con button:hover {
+  transform: scale(1.05);
+  background-color: white;
+  color: black;
+}
+
+.container img {
+  align-self: center;
+  margin-left: 8rem;
+  width: 40rem;
+  height: 30rem;
+  border-radius: 20px;
+}
+
+@media (max-width: 1000px) {
+  .container {
+    display: grid;
+    justify-content: center;
+    gap: 5rem;
+  }
+
+  .quote-con {
+    margin-top: 5rem;
+    margin-left: 3rem;
+  }
+
+  .container img {
+    margin: 0;
+  }
+}
