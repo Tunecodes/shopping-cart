@@ -1,0 +1,84 @@
+.container {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+  width: 90rem;
+  margin-top: 3.5rem;
+  margin-left: 15rem;
+}
+
+.card img {
+  width: 100%;
+  max-height: 16rem;
+  align-self: center;
+  margin-bottom: 10px;
+}
+
+.card {
+  display: grid;
+  padding: 20px;
+  border: solid black 2px;
+}
+
+.card-info {
+  text-align: center;
+  align-self: end;
+}
+
+.star {
+  font-size: 50px;
+}
+
+.buy-con {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.buy-con button {
+  font-weight: bold;
+  width: 10em;
+  height: 2.5em;
+  font-size: 14px;
+  background-color: black;
+  color: white;
+  border: 2px solid black;
+}
+
+.buy-con button:hover {
+  transition: transform 0.3s;
+  transform: scale(1.03);
+  background-color: white;
+  color: black;
+}
+
+.loading-con {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 48%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  justify-content: center;
+  align-items: center;
+}
+
+.loader {
+  border: 16px solid #f3f3f3;
+  border-top: 16px solid black;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  animation: spin 2s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
