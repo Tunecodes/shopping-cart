@@ -1,15 +1,23 @@
 import { useEffect, useState } from "react";
+import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import Navigation from "../navigation/Navigation";
 import styles from "./shop.module.css";
+import productStyle from "./product.module.css";
 import PropTypes from "prop-types";
 
 const Shop = () => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+
+  const navigate = useNavigate();
+
   useEffect(() => {
     const getData = async () => {
       try {
         const res = await fetch("https://fakestoreapi.com/products");
+        if (!res.ok) {
+          throw new Error(`HTTP error: Status ${res.status}`);
+        }
         const data = await res.json();
         setData(data);
         setIsLoading(false);
@@ -40,13 +48,67 @@ const Shop = () => {
               />
               <div className={styles["buy-con"]}>
                 <h4>${product.price}</h4>
-                <button>Buy</button>
+                <button
+                  onClick={() =>
+                    navigate(`/shop/product/${product.id}`, {
+                      state: { product },
+                    })
+                  }
+                >
+                  Buy
+                </button>
               </div>
             </div>
           </div>
         ))}
       </main>
     </div>
+  );
+};
+
+const Product = () => {
+  const { id } = useParams();
+  const [product, setProduct] = useState(null);
+
+  const location = useLocation();
+  const item = location.state?.product;
+
+  useEffect(() => {
+    const fetchProduct = async () => {
+      try {
+        if (!item) {
+          const res = await fetch(`https://fakestoreapi.com/products/${id}`);
+          if (!res.ok) {
+            throw new Error(`HTTP error: Status ${res.status}`);
+          }
+
+          const data = await res.json();
+
+          setProduct(data);
+        } else {
+          setProduct(item);
+        }
+      } catch (err) {
+        console.error(err.message);
+      }
+    };
+
+    fetchProduct();
+  }, [id, item]);
+
+  if (!product)
+    return (
+      <div className={styles["loading-con"]}>
+        <div className={styles["loader"]}></div>
+        <h2>Loading Product</h2>
+      </div>
+    );
+
+  return (
+    <>
+      <Navigation />
+      <div className={productStyle["container"]}></div>
+    </>
   );
 };
 
@@ -79,4 +141,4 @@ StarRating.propTypes = {
   count: PropTypes.number,
 };
 
-export default Shop;
+export { Shop, Product };
