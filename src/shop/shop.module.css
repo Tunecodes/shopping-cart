@@ -25,6 +25,15 @@
   align-self: end;
 }
 
+.rating-con {
+  display: flex;
+  align-items: center;
+}
+
+.rating-con>p {
+  margin-left: 2em;
+}
+
 .star {
   font-size: 50px;
 }

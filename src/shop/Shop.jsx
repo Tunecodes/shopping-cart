@@ -42,10 +42,10 @@ const Shop = () => {
             <img src={product.image}></img>
             <div className={styles["card-info"]}>
               <h3>{product.title}</h3>
-              <StarRating
-                rating={product.rating.rate}
-                count={product.rating.count}
-              />
+              <div className={styles["rating-con"]}>
+                <StarRating rating={product.rating.rate} />
+                <p>({product.rating.count})</p>
+              </div>
               <div className={styles["buy-con"]}>
                 <h4>${product.price}</h4>
                 <button
@@ -107,12 +107,32 @@ const Product = () => {
   return (
     <>
       <Navigation />
-      <div className={productStyle["container"]}></div>
+      <div className={productStyle["container"]}>
+        <img src={product.image}></img>
+        <div>
+          <h1>{product.title}</h1>
+          <div className={productStyle["rating-con"]}>
+            <StarRating rating={product.rating.rate} />
+            <p>({product.rating.rate} product rating)</p>
+          </div>
+          <h4>Category: {product.category}</h4>
+          <p className={productStyle["des"]}>{product.description}</p>
+          <h2 className={productStyle["price"]}>$ {product.price}</h2>
+          <div>
+            Quantity:{" "}
+            <input type="number" defaultValue={1} step="1" min="1" max="100" style={{paddingLeft: "5px"}}/>
+          </div>
+          <div className={productStyle["button-con"]}>
+            <button className={productStyle["buy"]}>Buy</button>
+            <button className={productStyle["cart"]}>Add to Cart</button>
+          </div>
+        </div>
+      </div>
     </>
   );
 };
 
-const StarRating = ({ rating, count }) => {
+const StarRating = ({ rating }) => {
   const stars = [];
   for (let i = 1; i <= 5; i++) {
     if (i <= Math.floor(rating)) {
@@ -131,7 +151,6 @@ const StarRating = ({ rating, count }) => {
           {star}
         </span>
       ))}
-      <div style={{ marginLeft: "15px" }}>({count})</div>
     </div>
   );
 };

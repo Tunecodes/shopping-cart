@@ -1,10 +1,81 @@
 .container {
-position: absolute;
-left: 50%;
-top: 40%;
-transform: translate(-50%,-50%);
-width: 60rem;
-height: 30rem;
-border: 2px solid black;
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  position: absolute;
+  left: 50%;
+  top: 26rem;
+  transform: translate(-50%, -50%);
+  width: 55rem;
+  border: 2px solid black;
+  gap: 5em;
+  padding: 2rem;
 }
 
+.container img {
+  justify-self: center;
+  align-self: center;
+  width: 20em;
+  height: 20em;
+}
+
+.container>div {
+  display: flex;
+  flex-direction: column;
+}
+
+.rating-con {
+  display: flex;
+  align-items: center;
+}
+
+.rating-con>p {
+  margin-left: 0.7em;
+}
+
+.des {
+  margin-top: 0.5em;
+}
+
+.price {
+  margin: 20px 0 20px 0;
+}
+
+.button-con {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  margin-top: 1em;
+}
+
+.buy,
+.cart {
+  border-radius: 5px;
+  border: black solid 1px;
+  font-size: 20px;
+  width: 10em;
+  height: 2em;
+}
+
+.buy {
+  background-color: white;
+}
+
+.buy:hover {
+  background-color: black;
+  color: white;
+}
+
+.cart {
+  background-color: black;
+  color: white;
+}
+
+.cart:hover {
+  background-color: white;
+  color: black;
+}
+
+.buy:hover,
+.cart:hover {
+  transition: transform 0.3s;
+  transform: scale(1.02);
+}
