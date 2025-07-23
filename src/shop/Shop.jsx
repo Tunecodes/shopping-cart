@@ -1,9 +1,21 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Link, useNavigate, useParams, useLocation } from "react-router-dom";
 import Navigation from "../navigation/Navigation";
 import styles from "./shop.module.css";
 import productStyle from "./product.module.css";
 import PropTypes from "prop-types";
+import styled from "styled-components";
+
+const AddedPopup = styled.div`
+  display: flex;
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  transform: ${(props) => (props.show ? "translateY(0)" : "translateY(100%)")};
+  transition: transform 0.3s ease-in-out;
+width: 15rem;
+height: 5rem;
+`;
 
 const Shop = () => {
   const [data, setData] = useState([]);
@@ -69,9 +81,12 @@ const Shop = () => {
 const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
+  const quantity = useRef(0);
 
   const location = useLocation();
   const item = location.state?.product;
+
+  const [showPopup, setShowPopup] = useState(false);
 
   useEffect(() => {
     const fetchProduct = async () => {
@@ -107,6 +122,9 @@ const Product = () => {
   return (
     <>
       <Navigation />
+      <AddedPopup show={showPopup}>
+        <p className={productStyle["notification"]}>Sent to Cart</p>
+      </AddedPopup>
       <div className={productStyle["container"]}>
         <img src={product.image}></img>
         <div>
@@ -120,16 +138,52 @@ const Product = () => {
           <h2 className={productStyle["price"]}>$ {product.price}</h2>
           <div>
             Quantity:{" "}
-            <input type="number" defaultValue={1} step="1" min="1" max="100" style={{paddingLeft: "5px"}}/>
+            <input
+              type="number"
+              ref={quantity}
+              defaultValue={1}
+              step="1"
+              min="1"
+              max="100"
+              style={{ paddingLeft: "5px" }}
+            />
           </div>
           <div className={productStyle["button-con"]}>
-            <button className={productStyle["buy"]}>Buy</button>
-            <button className={productStyle["cart"]}>Add to Cart</button>
+            <button
+              className={productStyle["buy"]}
+              onClick={() => addToCart(Number(quantity.current.value), product)}
+            >
+              Buy
+            </button>
+            <button
+              className={productStyle["cart"]}
+              onClick={() => {
+                addToCart(Number(quantity.current.value), product);
+                setShowPopup(true);
+                setTimeout(() => setShowPopup(false), 1500);
+              }}
+            >
+              Add to Cart
+            </button>
           </div>
         </div>
       </div>
     </>
   );
+};
+
+const addToCart = (quantity, product) => {
+  const key = product.id;
+  const existing = localStorage.getItem(key);
+
+  if (!existing) {
+    const newProduct = { ...product, quantity };
+    localStorage.setItem(key, JSON.stringify(newProduct));
+  } else {
+    const parsed = JSON.parse(existing);
+    parsed.quantity += quantity;
+    localStorage.setItem(key, JSON.stringify(parsed));
+  }
 };
 
 const StarRating = ({ rating }) => {
@@ -157,7 +211,6 @@ const StarRating = ({ rating }) => {
 
 StarRating.propTypes = {
   rating: PropTypes.number,
-  count: PropTypes.number,
 };
 
 export { Shop, Product };

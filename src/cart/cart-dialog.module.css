@@ -1,0 +1,33 @@
+.backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 300;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.cart {
+  display: grid;
+  grid-template-rows: 1fr 10fr 2fr;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 30rem;
+  height: 100vh;
+  background-color: white;
+  transition: transform 0.5s ease-in-out;
+  z-index: 301;
+}
+
+.cart>h2 {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.items-con {
+  border-top: dotted black 2px;
+  border-bottom: dotted black 2px;
+}
