@@ -1,0 +1,137 @@
+.backdrop {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 300;
+  background-color: rgba(0, 0, 0, 0.6);
+}
+
+.cart {
+  display: grid;
+  grid-template-rows: 1fr 10fr 1fr;
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 30rem;
+  height: 100vh;
+  background-color: white;
+  transition: transform 0.5s ease-in-out;
+  z-index: 301;
+}
+
+.cart>h2 {
+  text-align: center;
+  margin-top: 1em;
+}
+
+.items-con {
+  display: flex;
+  flex-direction: column;
+  overflow: scroll;
+  border-top: solid black 2px;
+  border-bottom: solid black 2px;
+}
+
+.item {
+  display: grid;
+  grid-template-columns: 1fr 3fr;
+  padding: 10px;
+  height: 7.5em;
+  gap: 15px;
+  border-bottom: dotted black 1px;
+}
+
+.item>img {
+  justify-self: center;
+  align-self: center;
+  width: 6em;
+  height: 6em;
+}
+
+.item-info {
+  display: grid;
+  grid-template-columns: 3fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  align-items: center;
+  height: 8em;
+}
+
+.item-info>input {
+  width: 4em;
+  padding-left: 3px;
+}
+
+.quantity {
+  width: 5em;
+  height: 1.5em;
+}
+
+.delete-item {
+  justify-self: center;
+  align-self: start;
+  margin-top: 0.3em;
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+}
+
+.subtotal-con {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  align-content: center;
+  padding-left: 5px;
+}
+
+.subtotal {
+  display: flex;
+  height: 7em;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-content: space-evenly;
+  margin-left: 1em;
+}
+
+.subtotal-buttons {
+  display: grid;
+  grid-template-rows: 1fr 1fr;
+}
+
+.subtotal-buttons button {
+  justify-self: center;
+  align-self: end;
+  width: 12em;
+  height: 2.5em;
+  font-size: 20px;
+  border-radius: 10px;
+}
+
+.subtotal-buttons button:hover {
+  transform: scale(1.05);
+  transition: transform 0.3s ease-in-out;
+}
+
+.continue-button {
+  background-color: white;
+  border: solid black 1px;
+}
+
+.checkout-button {
+  background-color: black;
+  color: white;
+  border: solid black 1px;
+}
+
+.empty {
+  display: flex;
+  flex-direction: column;
+  align-self: center;
+  margin: auto;
+  align-items: center;
+}
+
+.empty h1{
+  transform: translateX(-50%);
+}

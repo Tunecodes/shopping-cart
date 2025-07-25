@@ -13,8 +13,8 @@ const AddedPopup = styled.div`
   bottom: 0;
   transform: ${(props) => (props.show ? "translateY(0)" : "translateY(100%)")};
   transition: transform 0.3s ease-in-out;
-width: 15rem;
-height: 5rem;
+  width: 15rem;
+  height: 5rem;
 `;
 
 const Shop = () => {
@@ -82,9 +82,9 @@ const Product = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const quantity = useRef(0);
-
   const location = useLocation();
   const item = location.state?.product;
+  const navigate = useNavigate();
 
   const [showPopup, setShowPopup] = useState(false);
 
@@ -151,7 +151,10 @@ const Product = () => {
           <div className={productStyle["button-con"]}>
             <button
               className={productStyle["buy"]}
-              onClick={() => addToCart(Number(quantity.current.value), product)}
+              onClick={() => {
+                addToCart(Number(quantity.current.value), product);
+                navigate("/cart");
+              }}
             >
               Buy
             </button>
@@ -184,6 +187,8 @@ const addToCart = (quantity, product) => {
     parsed.quantity += quantity;
     localStorage.setItem(key, JSON.stringify(parsed));
   }
+
+  window.dispatchEvent(new Event("cartUpdated"));
 };
 
 const StarRating = ({ rating }) => {

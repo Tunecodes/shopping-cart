@@ -31,7 +31,24 @@
 }
 
 .nav a:hover {
-color:gray;
+  color: gray;
 }
 
+.totalCount {
+  position: absolute;
+  font-size: 14px;
+  top: 0;
+  right: 0;
+  margin-right: 28%;
+  margin-top: 24px;
+}
 
+.totalCount:hover{
+
+  cursor: pointer;
+  background-color: gray;
+}
+
+.cart {
+  position: relative;
+}
