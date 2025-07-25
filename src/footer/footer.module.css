@@ -1,0 +1,22 @@
+.container {
+  display: flex;
+  position: relative;
+  bottom: 0;
+  transform: translateY(100%);
+  width: 100vw;
+  height: 10rem;
+  background-color: black;
+}
+
+.footer-con {
+  display: flex;
+  flex-direction: column;
+  color: gray;
+  margin: auto;
+  align-self: center;
+  text-align: center;
+}
+
+.footer-con>p {
+  margin-top: 1em;
+}

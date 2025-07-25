@@ -1,11 +1,15 @@
 import styles from "./navigation.module.css";
 import { useNavigate, Link } from "react-router-dom";
 import { useState } from "react";
-import CartModal from "../cart/CartModal";
+import { CartModal } from "../cart/CartModal";
+import { useLocation } from "react-router-dom";
 
 const Navigation = () => {
   const navigate = useNavigate();
   const [cartOpen, setCartOpen] = useState(false);
+  const location = useLocation();
+  const route = location.pathname;
+
   return (
     <>
       <nav className={styles["nav-container"]}>
@@ -19,7 +23,10 @@ const Navigation = () => {
         <div className={styles["nav"]}>
           <Link to="/">Home</Link>
           <Link to="/shop">Shop</Link>
-          <Link onClick={() => setCartOpen(true)} className={styles["cart"]}>
+          <Link
+            onClick={route !== "/cart" ? () => setCartOpen(true) : undefined}
+            className={styles["cart"]}
+          >
             {" "}
             <p className={styles["totalCount"]}>
               {localStorage.length ? totalProducts(localStorage.length) : ""}

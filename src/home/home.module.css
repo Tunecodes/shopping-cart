@@ -68,10 +68,6 @@ button:hover {
   border-radius: 20px;
 }
 
-.footer-con {
-  background-color: black;
-}
-
 @media (max-width: 1000px) {
   .container {
     display: grid;

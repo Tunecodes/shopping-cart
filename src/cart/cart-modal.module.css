@@ -34,7 +34,6 @@
   border-top: solid black 2px;
   border-bottom: solid black 2px;
 }
-
 .item {
   display: grid;
   grid-template-columns: 1fr 3fr;
@@ -132,6 +131,6 @@
   align-items: center;
 }
 
-.empty h1{
+.empty h1 {
   transform: translateX(-50%);
 }

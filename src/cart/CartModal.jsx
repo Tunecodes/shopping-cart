@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { getAllProducts, subTotal } from "./utlity";
 
 import styles from "./cart-modal.module.css";
 import styled from "styled-components";
@@ -18,7 +19,7 @@ const CartModal = ({ cartOpen, closeCart }) => {
   const [items, setItems] = useState([]);
   const [renderFlag, setRenderFlag] = useState(false);
   useEffect(() => {
-    setItems(itemsInCart());
+    setItems(getAllProducts());
   }, [renderFlag]);
 
   useEffect(() => {
@@ -45,14 +46,9 @@ const CartModal = ({ cartOpen, closeCart }) => {
               <h2>Empty Cart</h2>
             </div>
           ) : (
-            items.map((item, index) => (
+            items.map((item) => (
               <div key={item.id}>
-                <Item
-                  product={item}
-                  items={items}
-                  setItems={setItems}
-                  index={index}
-                />
+                <Item product={item} items={items} setItems={setItems} />
               </div>
             ))
           )}
@@ -106,7 +102,7 @@ const Item = ({ product, items, setItems }) => {
         </button>
         <input
           className={styles["qauantity"]}
-          defaultValue={count}
+          value={count}
           onChange={(e) => {
             const newQuantity = Number(e.target.value);
             setQuantity(newQuantity);
@@ -120,27 +116,13 @@ const Item = ({ product, items, setItems }) => {
           step={1}
         />
         <div>
-          ${quantity * product.price || product.quantity * product.price}
+          $
+          {Number((quantity * product.price).toFixed(2)) ||
+            (product.quantity * product.price).toFixed(2)}
         </div>
       </div>
     </div>
   );
 };
 
-const subTotal = (items) => {
-  return items
-    .map((item) => [item.price, item.quantity])
-    .reduce((acc, curr) => acc + curr[0] * curr[1], 0);
-};
-
-const itemsInCart = () => {
-  const products = [];
-  for (let i = 0; i < localStorage.length; i++) {
-    const key = localStorage.key(i);
-    const product = JSON.parse(localStorage.getItem(key));
-    products.push(product);
-  }
-  return products;
-};
-
-export {CartModal, Item};
+export { CartModal, Item };

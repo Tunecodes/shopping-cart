@@ -1,6 +1,7 @@
 import Navigation from "../navigation/Navigation";
 import styles from "./home.module.css";
 import { useNavigate } from "react-router-dom";
+import Footer from "../footer/Footer";
 const Home = () => {
   const navigate = useNavigate();
 
@@ -16,7 +17,7 @@ const Home = () => {
         </div>
         <img src="https://img.freepik.com/free-photo/top-view-accessoires-travel-with-women-clothing-concept-white-mobilephone-watch-bag-hat-map-camera-necklace-trousers-sunglasses-white-wood-table_1921-106.jpg?semt=ais_hybrid&w=740"></img>
       </main>
-      <div className={styles["footer-con"]}>hello </div>
+      <Footer />
     </div>
   );
 };

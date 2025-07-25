@@ -5,6 +5,7 @@ import styles from "./shop.module.css";
 import productStyle from "./product.module.css";
 import PropTypes from "prop-types";
 import styled from "styled-components";
+import Footer from "../footer/Footer";
 
 const AddedPopup = styled.div`
   display: flex;
@@ -74,6 +75,7 @@ const Shop = () => {
           </div>
         ))}
       </main>
+        <Footer />
     </div>
   );
 };
